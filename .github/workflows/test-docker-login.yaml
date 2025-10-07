@@ -1,0 +1,28 @@
+name: test-docker-login
+on:
+  workflow_dispatch:  # gives you the "Run workflow" button
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check required secrets exist
+        env:
+          DU: ${{ secrets.DOCKER_USERNAME }}
+          DP: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          if [ -z "$DU" ] || [ -z "$DP" ]; then
+            echo "ERROR: Missing DOCKER_USERNAME and/or DOCKER_PASSWORD."
+            exit 1
+          else
+            echo "Secrets found ✅"
+          fi
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Done
+        run: echo "Docker login succeeded ✅"
