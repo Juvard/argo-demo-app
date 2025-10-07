@@ -40,7 +40,7 @@ jobs:
           DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
           TAG: ${{ steps.vars.outputs.TAG }}
         run: |
-          IMAGE=${juvard}/nginx-demo:${TAG}
+          IMAGE=${DOCKER_USER}/nginx-demo:${TAG}
           docker build -t $IMAGE .
           docker push $IMAGE
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
