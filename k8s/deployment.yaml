@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: juvard/nginx-demo:9932857
+          image: juvard/nginx-demo:17876bd
           ports:
             - containerPort: 80
